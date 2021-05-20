@@ -54,4 +54,6 @@ dependencies {
     //Live Data
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.3.1"
 
+    //Junit Testing Assertion
+    testImplementation "com.google.truth:truth:1.1.2"
 }

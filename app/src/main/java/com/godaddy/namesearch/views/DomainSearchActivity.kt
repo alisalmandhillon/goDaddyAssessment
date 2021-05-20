@@ -24,6 +24,7 @@ class DomainSearchActivity : AppCompatActivity() {
     private lateinit var viewModel: DomainSearchViewModel
     private lateinit var progressBar:ProgressBar
     private lateinit var cartButton:Button
+    private lateinit var listView:ListView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,9 +33,9 @@ class DomainSearchActivity : AppCompatActivity() {
         searchResultAdapter = SearchResultAdapter(this)
         progressBar=findViewById(R.id.progress_bar)
         cartButton=findViewById(R.id.view_cart_button)
+        listView=findViewById(R.id.results_list_view)
         initializeSearchButton()
         configureCartButton()
-        initializeCartButton()
         initializeListViewListener()
     }
     private fun initializeSearchButton(){
@@ -45,32 +46,8 @@ class DomainSearchActivity : AppCompatActivity() {
             }
         }
     }
-    private fun initializeCartButton(){
-        findViewById<ListView>(R.id.results_list_view).also { listView ->
-            listView.choiceMode = ListView.CHOICE_MODE_MULTIPLE
-            listView.adapter = searchResultAdapter
-            listView.setOnItemClickListener { _, view, position, _ ->
-                val item = searchResultAdapter.getItem(position)
-                ShoppingCart.domains = ShoppingCart.domains.toMutableList().also {
-                    if (ShoppingCart.domains.contains(item)) {
-                        it.remove(item)
-                    } else {
-                        item?.apply { it.add(item) }
-                    }
-                }
-                item?.apply {
-                    item.selected = !item.selected
-                    view.setBackgroundColor(when (item.selected) {
-                        true -> Color.LTGRAY
-                        false -> Color.TRANSPARENT
-                    })
-                }
-                configureCartButton()
-            }
-        }
-    }
     private fun initializeListViewListener() {
-        findViewById<ListView>(R.id.results_list_view).also { listView ->
+        listView.also { listView ->
             listView.choiceMode = ListView.CHOICE_MODE_MULTIPLE
             listView.adapter = searchResultAdapter
             listView.setOnItemClickListener { _, view, position, _ ->

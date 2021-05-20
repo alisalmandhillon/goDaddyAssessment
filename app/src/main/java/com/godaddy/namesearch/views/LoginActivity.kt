@@ -17,6 +17,7 @@ import com.godaddy.namesearch.repository.MainRepository
  import com.godaddy.namesearch.managers.AuthManager
 import com.godaddy.namesearch.R
 import com.godaddy.namesearch.managers.DataManager
+import com.godaddy.namesearch.utils.Tools
 import com.godaddy.namesearch.viewModels.LoginViewModel
 import com.godaddy.namesearch.viewModels.ViewModelFactory
 import kotlinx.coroutines.*
@@ -59,10 +60,11 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     override fun onClick(v: View?) {
         val username = findViewById<EditText>(R.id.username).text.toString()
         val password = findViewById<EditText>(R.id.password).text.toString()
-        if(username.isNotEmpty() && password.isNotEmpty()) {
+        var validateResult=Tools.validateLogin(username,password)
+        if(validateResult.equals(Tools.SuccessKey)) {
             callLoginApi(LoginRequest(username, password))
         } else {
-            Toast.makeText(applicationContext,"Please enter username and password",Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext,validateResult,Toast.LENGTH_SHORT).show()
         }
     }
     private fun callLoginApi(loginRequest: LoginRequest) {
