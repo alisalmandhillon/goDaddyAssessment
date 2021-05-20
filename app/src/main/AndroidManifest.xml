@@ -6,13 +6,13 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:allowBackup="true"
+        android:allowBackup="false"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.NameSearch">
-        <activity android:name=".LoginActivity">
+        <activity android:name=".views.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,14 +20,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".PaymentMethodActivity"
-            android:parentActivityName=".CartActivity"/>
+            android:name=".views.PaymentMethodActivity"
+            android:parentActivityName=".views.CartActivity"/>
         <activity
-            android:name=".CartActivity"
-            android:parentActivityName=".DomainSearchActivity"/>
+            android:name=".views.CartActivity"
+            android:parentActivityName=".views.DomainSearchActivity"/>
         <activity
-            android:name=".DomainSearchActivity"
-            android:parentActivityName=".LoginActivity"/>
+            android:name=".views.DomainSearchActivity" />
     </application>
 
 </manifest>
